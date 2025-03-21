@@ -9,7 +9,7 @@ class FilterButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bookProvider = Provider.of<BookProvider>(context);
-    
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Column(
@@ -21,12 +21,9 @@ class FilterButtons extends StatelessWidget {
             children: [
               const Text(
                 'Filters:',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
-              if (bookProvider.filterCategory.isNotEmpty || 
+              if (bookProvider.filterCategory.isNotEmpty ||
                   bookProvider.filterStatus.isNotEmpty)
                 TextButton(
                   onPressed: () {
@@ -107,10 +104,7 @@ class FilterButtons extends StatelessWidget {
             child: Text('All Statuses'),
           ),
           ...Constants.readingStatuses.map((status) {
-            return DropdownMenuItem<String>(
-              value: status,
-              child: Text(status),
-            );
+            return DropdownMenuItem<String>(value: status, child: Text(status));
           }).toList(),
         ],
       ),

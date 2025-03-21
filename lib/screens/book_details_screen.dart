@@ -12,7 +12,9 @@ class BookDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final statusColor = Color(Constants.statusColors[book.readingStatus] ?? 0xFFBDBDBD);
+    final statusColor = Color(
+      Constants.statusColors[book.readingStatus] ?? 0xFFBDBDBD,
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -86,10 +88,7 @@ class BookDetailsScreen extends StatelessWidget {
               if (book.notes != null && book.notes!.isNotEmpty) ...[
                 const Text(
                   'Notes:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 8),
                 Container(
@@ -108,9 +107,7 @@ class BookDetailsScreen extends StatelessWidget {
               const SizedBox(height: 24),
               Text(
                 'Added on: ${_formatDate(book.dateAdded)}',
-                style:TextStyle(
-                  color: Colors.grey.shade600,
-                ),
+                style: TextStyle(color: Colors.grey.shade600),
               ),
               const SizedBox(height: 32),
               _buildStatusUpdateButton(context),
@@ -136,11 +133,7 @@ class BookDetailsScreen extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            icon,
-            size: 16,
-            color: color,
-          ),
+          Icon(icon, size: 16, color: color),
           const SizedBox(width: 4),
           Text(
             label,
@@ -173,7 +166,8 @@ class BookDetailsScreen extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    final nextStatus = book.readingStatus == 'Not Started' ? 'Reading' : 'Finished';
+    final nextStatus =
+        book.readingStatus == 'Not Started' ? 'Reading' : 'Finished';
     final statusColor = Color(Constants.statusColors[nextStatus] ?? 0xFFBDBDBD);
 
     return SizedBox(
@@ -202,30 +196,31 @@ class BookDetailsScreen extends StatelessWidget {
   void _showDeleteConfirmationDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Delete Book'),
-        content: Text('Are you sure you want to delete "${book.title}"?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Cancel'),
+      builder:
+          (context) => AlertDialog(
+            title: const Text('Delete Book'),
+            content: Text('Are you sure you want to delete "${book.title}"?'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Provider.of<BookProvider>(
+                    context,
+                    listen: false,
+                  ).deleteBook(book.id!);
+                  Navigator.pop(context); // Close dialog
+                  Navigator.pop(context); // Go back to home screen
+                },
+                style: TextButton.styleFrom(foregroundColor: Colors.red),
+                child: const Text('Delete'),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () {
-              Provider.of<BookProvider>(context, listen: false)
-                  .deleteBook(book.id!);
-              Navigator.pop(context); // Close dialog
-              Navigator.pop(context); // Go back to home screen
-            },
-            style: TextButton.styleFrom(
-              foregroundColor: Colors.red,
-            ),
-            child: const Text('Delete'),
-          ),
-        ],
-      ),
     );
   }
 

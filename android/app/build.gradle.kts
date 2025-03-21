@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.book_library_app"
+    namespace = "com.jakkrapart.a66543210005"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -21,7 +21,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.book_library_app"
+        applicationId = "com.jakkrapart.a66543210005"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
